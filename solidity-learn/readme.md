@@ -1,12 +1,13 @@
 ### 关键字
 public：任何人都可以调用该函数，包括DApp的使用者。
 private：只有合约本身可以调用该函数（在另一个函数中）。
-internal：只有这份合约以及由此产生的所有合约 才能调用。
-external：只有外部可以调用该函数，而合约内部不能调用。
+internal：可以在内部被调用， 不能再外部被调用，可以被继承
+external：只有外部可以调用该函数，而合约内部不能调用。如果强行调用，通过“地址.”
 view：只查看状态而不改变
 pure：也可以自由调用，既不读取也不写入区块链
 payable:常常用于将代币发送给合约地址
-memory：
+memory：内存中数据
+storage: 存储在链上的数据
 
 ### 位运算符
 1.& 操作数之间转换成二进制之后每位进行与运算操作（同1取1）
@@ -113,4 +114,32 @@ contract modifierTest {
   }
 
 }
+```
+
+### getter
+全局变量加public 默认会生成external函数
+合约的销毁： selfdestruct(owner)
+
+### 内存 引用 持久化存储
+storage memory 修饰的数据相互赋值是值拷贝
+memory 和 memory 之间传递的是引用
+storage 和 storage 之间传递的是引用
+
+
+### 枚举体
+ - enum必须要有成员对象
+ - 不能有汉字
+
+### truffle
+安装truffle: $ npm install -g truffle
+初始化项目:  $ truffle init
+编译合约: $ truffle develop    
+        $ compile
+部署合约: $migrate
+重新部署合约: $migrate --reset
+终端获取合约对象:  部署HelloWorld合约后
+```
+$ let contract;
+$ HelloWorld.deployed().then(i => contract = i);
+$ contract.test() // 调用HelloWorld合约中的test方法
 ```

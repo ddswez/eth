@@ -14,4 +14,8 @@ contract HelloWorld {
   function echo(string memory s) public returns (string memory) {
     return s;
   }
+
+  function mulAToB(uint a, uint b) public pure returns (uint) {
+    return a * b;
+  }
 }
